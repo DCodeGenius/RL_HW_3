@@ -23,7 +23,7 @@ for i in range(num_episodes):
     #The Q-Table learning algorithm
     while j < 99:
         j+=1
-        # TODO: Implement Q-Learning
+        # Q-Learning update
         # 1. Choose an action by greedily (with noise) picking from Q table
         # 2. Get new state and reward from environment
         # 3. Update Q-Table with new knowledge
