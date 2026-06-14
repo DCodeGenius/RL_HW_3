@@ -8,7 +8,7 @@ env = gym.make('FrozenLake-v0')
 
 # Define the neural network mapping 16x1 one hot vector to a vector of 4 Q values
 # and training loss
-# TODO: define network, loss and optimiser(use learning rate of 0.1).
+# Define network, loss and optimiser(use learning rate of 0.1).
 input_vectors = np.identity(env.observation_space.n)
 W = np.random.uniform(0, 0.01, size=(env.observation_space.n, env.action_space.n))
 lr = 0.1
@@ -36,7 +36,7 @@ for i in range(num_episodes):
         j += 1
         # 1. Choose an action greedily from the Q-network
         #    (run the network for current state and choose the action with the maxQ)
-        # TODO: Implement Step 1
+        # Step 1
         Q = predict(s)
         a = np.argmax(Q, axis=1)
 
@@ -48,17 +48,17 @@ for i in range(num_episodes):
         s1, r, d, _ = env.step(a[0])
 
         # 4. Obtain the Q'(mark as Q1) values by feeding the new state through our network
-        # TODO: Implement Step 4
+        # Step 4
         Q1 = predict(s1)
 
         # 5. Obtain maxQ' and set our target value for chosen action using the bellman equation.
-        # TODO: Implement Step 5
+        # Step 5
         maxQ1 = np.max(Q1)
         targetQ = np.copy(Q)
         targetQ[0, a[0]] = r if d else r + y * maxQ1
 
         # 6. Train the network using target and predicted Q values (model.zero(), forward, backward, optim.step)
-        # TODO: Implement Step 6
+        # Step 6
         W[s, :] += lr * (targetQ[0] - Q[0])
 
         rAll += r
